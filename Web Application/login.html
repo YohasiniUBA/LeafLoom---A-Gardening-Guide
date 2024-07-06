@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        body {
+            font-family: "Catamaran", sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background-size: cover;
+            background-position: center;
+            background-color: transparent;
+        }
+
+        /* Header styles */
+        header {
+            background-color: #588C7E; /* Viridian */
+            padding: 20px;
+            text-align: center;
+        }
+
+        header img {
+            max-width: 40px;
+            max-height: 40px;
+        }
+
+        header h1 {
+            font-family: "Livvic", sans-serif;
+            font-size: 24px;
+            color: #FFFFFF; /* White */
+            margin: 0;
+            text-align: center;
+        }
+
+        .header-box {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* Container styles */
+        .container {
+            padding: 20px;
+            text-align: center;
+            background-color: #C1E1C1; /* Pastel Green */
+        }
+
+        /* Login Form Section */
+        .example {
+            border-bottom: 1px solid #00704A; /* Jungle Green */
+            padding-bottom: 20px;
+            margin-bottom: 20px;
+        }
+
+        .form-container {
+            width: 30%;
+            margin: 0 auto;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            background-color: #588C7E; /* Viridian */
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
+        }
+
+        form label {
+            color: #FFFFFF; /* White */
+            margin-bottom: 8px;
+        }
+
+        form input {
+            width: 70%;
+            padding: 10px;
+            margin-bottom: 16px;
+            border: none;
+            border-radius: 8px;
+        }
+
+        form button {
+            background-color: #00704A; /* Jungle Green */
+            color: #FFFFFF; /* White */
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        form button:hover {
+            background-color: #005634; /* Darker Jungle Green */
+        }
+
+        /* Footer styles */
+        footer {
+            background-color: #588C7E; /* Viridian */
+            padding: 20px;
+            text-align: center;
+            color: #FFFFFF; /* White */
+        }
+    </style>
+</head>
+<body>
+
+<!-- Header with Home Logo and Software Name -->
+<header>
+    <div class="header-box">
+        <a href="website.html"><img src="home_icon.png" alt="Home Icon"></a>
+        <h1>LeafLoom</h1>
+    </div>
+</header>
+
+<!-- Main Content -->
+<div class="container">
+    <!-- Login Form Section -->
+    <section class="example">
+        <h2>Login</h2>
+        <div class="form-container">
+            <form id="loginForm" onsubmit="return validateLogin()">
+                <!-- Email -->
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+
+                <!-- Username -->
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
+
+                <!-- Password -->
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+
+                <!-- Login Button -->
+                <button type="submit">Login</button>
+            </form>
+        </div>
+    </section>
+</div>
+
+<!-- Footer with Contact Us details -->
+<footer>
+    <p>Contact Us: support@gardeningmadeeasy.com | Phone: +91 9846263749</p>
+</footer>
+
+<!-- JavaScript for form validation and login functionality -->
+<script>
+    function validateLogin() {
+        var email = document.getElementById("email").value;
+        var username = document.getElementById("username").value;
+        var password = document.getElementById("password").value;
+
+        // Perform validation checks
+        if (email.trim() === "") {
+            alert("Email is required");
+            return false;
+        }
+
+        // Validate email format
+        var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            alert("Please enter a valid email address");
+            return false;
+        }
+
+        if (username.trim() === "") {
+            alert("Username is required");
+            return false;
+        }
+
+        if (password.trim() === "") {
+            alert("Password is required");
+            return false;
+        }
+
+        if (password.length < 8 || password.length > 16) {
+            alert("Password must be between 8 and 16 characters");
+            return false;
+        }
+
+        // Redirect to the website page
+        window.location.href = "website.html";
+
+        return false;
+    }
+</script>
+
+</body>
+</html>

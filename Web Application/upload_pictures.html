@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LeafLoom - Upload Pictures</title>
+    <!-- Include your CSS stylesheet here -->
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: "Catamaran", sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background-color: #C1E1C1; /* Pastel Green */
+        }
+
+        /* Header styles */
+        header {
+            background-color: #588C7E; /* Viridian */
+            padding: 20px;
+            text-align: center;
+        }
+
+        header img {
+            max-width: 30px; /* Smaller image size */
+            max-height: 30px; /* Smaller image size */
+        }
+
+        header h1 {
+            font-family: "Livvic", sans-serif;
+            font-size: 24px;
+            color: #FFFFFF; /* White */
+            margin: 0;
+        }
+
+        .header-box {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav {
+            background-color: #588C7E; /* Viridian */
+            padding: 10px;
+            font-family: "Livvic", sans-serif;
+            text-align: center;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            margin: 0;
+            padding: 0;
+            justify-content: space-around;
+        }
+
+        nav ul li {
+            margin-right: 20px;
+            position: relative;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #FFFFFF; /* White */
+            font-size: 18px;
+            padding: 10px;
+            background-color: #588C7E; /* Viridian */
+            border-radius: 8px;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #588C7E; /* Viridian */
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+            border-radius: 8px;
+            text-align: left;
+        }
+
+        nav ul li:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown-content a {
+            color: #FFFFFF; /* White */
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #00704A; /* Jungle Green */
+            border-radius: 8px;
+        }
+
+        /* Container styles */
+        .container {
+            padding: 20px;
+            text-align: center;
+            background-color:#C1E1C1; /* Pastel Green */
+        }
+
+        /* Style for lines between examples */
+        .example {
+            border-bottom: 1px solid #00704A; /* Jungle Green */
+            padding-bottom: 20px;
+            margin-bottom: 20px;
+        }
+
+        /* Footer styles */
+        footer {
+            background-color: #588C7E; /* Viridian */
+            padding: 20px;
+            text-align: center;
+            color: #FFFFFF; /* White */
+        }
+
+        /* Upload Pictures Section Styles */
+	  .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            grid-gap: 10px;
+            padding: 20px;
+        }
+
+        .gallery img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .gallery img:hover {
+            transform: scale(1.1);
+        }
+
+        .uploaded-media {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        .media-item {
+    	  margin-bottom: 10px;
+        text-align: left;
+        }
+
+	  .media-item img,
+        .media-item video {
+        max-width: 100%; /* Adjusted to make media full width */
+        border-radius: 8px;
+        }
+
+	  .share-button {
+    	  background-color: #00704A; /* Jungle Green */
+    	  color: #FFFFFF; /* White */
+    	  padding: 10px; /* Larger button size */
+    	  border-radius: 10px;
+    	  cursor: pointer;
+    	  display: block; /* Ensures the button takes full width */
+    	  margin: 10px auto;
+	  }
+
+	  .upload-form {
+    	  margin-bottom: 20px;
+        text-align: center;
+	  }
+
+	  .container {
+    	  display: flex;
+    	  flex-direction: column;
+    	  align-items: flex-start;
+    	  max-width: 600px; /* Optional: Set a maximum width for the container */
+   	  margin: 0 auto; /* Optional: Center the container horizontally */
+	  }
+
+
+        /* Profile dropdown styles */
+        .profile-dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .profile-content {
+            display: none;
+            position: absolute;
+            background-color: #588C7E; /* Viridian */
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+            border-radius: 8px;
+            text-align: left;
+            right: 0; /* Align to the right */
+        }
+
+        .profile-dropdown:hover .profile-content {
+            display: block;
+        }
+
+        .profile-content a {
+            color: #FFFFFF; /* White */
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .profile-content a:hover {
+            background-color: #00704A; /* Jungle Green */
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Header with Home Logo, Software Name, and Profile Logo -->
+<header>
+    <div class="header-box">
+        <a href="website.html"><img src="home_icon.png" alt="Home Icon"></a>
+        <h1>LeafLoom</h1>
+        <div class="profile-dropdown">
+            <img src="profile_icon.png" alt="Profile Logo">
+            <div class="profile-content">
+                <a href="#profile">My Profile</a>
+                <a href="#journal">My Journal</a>
+                <a href="#wishlist">Wishlist</a>
+                <a href="#logout">Logout</a>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Navigation Bar -->
+<nav>
+    <ul>
+        <li>
+            <a href="#plants">My Plants</a>
+            <div class="dropdown-content">
+                <a href="#">Tomato</a>
+                <a href="#">Chilli</a>
+                <a href="#">Hibiscus</a>
+                <a href="add_plant.html">Add plant</a>
+            </div>
+        </li>
+        <li>
+            <a href="#resources">Resources</a>
+            <div class="dropdown-content">
+                <a href="#">Articles</a>
+                <a href="#">Tutorial videos</a>
+            </div>
+        </li>
+        <li>
+            <a href="#tasks">Tasks</a>
+            <div class="dropdown-content">
+                <a href="tasks.html">Monthly</a>
+                <a href="#">Weekly</a>
+                <a href="#">Daily</a>
+            </div>
+        </li>
+        <li>
+            <a href="#plantCare">Plant Care Tips</a>
+            <div class="dropdown-content">
+                <a href="#">Pest Control</a>
+                <a href="#">Manure/Fertilizers</a>
+            </div>
+        </li>
+	  <li>
+            <a href="#community">Community</a>
+            <div class="dropdown-content">
+                <a href="#">Forums</a>
+                <a href="#">Events</a>
+            </div>
+        </li>
+    </ul>
+</nav>
+
+<!-- Main Content -->
+<div class="container">
+    <!-- Upload Pictures Section -->
+    <section class="example">
+        <h2>Uploaded Media</h2>
+        <!-- Display User's Uploaded Pictures and Videos -->
+        <div class="uploaded-media">
+            <!-- Display Each Uploaded Media Item -->
+            <div class="gallery">
+    		<img src="tomato_uploaded.jpg" alt="Tomato">
+   		<img src="chilli_uploaded.jpg" alt="Chilli">
+    		<img src="hibiscus_uploaded.jpg" alt="Hibiscus">
+		</div>
+		<div class="container">
+            <div class="media-item">
+                <video controls>
+                    <source src="home_garden.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+		</div>
+		<br>
+            <button class="share-button" onclick="showUploadedPopup()">Share</button>
+        </div>
+
+        <!-- Upload Form -->
+        <div class="upload-form">
+            <label for="fileInput">Choose a file to upload:</label>
+            <input type="file" id="fileInput" name="fileInput" onchange="updateUploadFileName(this)">
+		<br><br>
+            <button class="share-button" onclick="openFileExplorer()">Upload</button>
+        </div>
+    </section>
+</div>
+
+<!-- Footer with Contact Us details -->
+<footer>
+    <p>Contact Us: support@gardeningmadeeasy.com | Phone: +91 9846263749</p>
+</footer>
+
+<!-- JavaScript for pop-up functionality -->
+<script>
+    function openFileExplorer() {
+        // Simulate opening a file explorer window
+        alert("File uploaded successfully!");
+    }
+
+    function updateUploadFileName(input) {
+        // Display the selected file name (optional)
+        var fileName = input.files[0].name;
+        alert("Selected file: " + fileName);
+    }
+
+    function showUploadedPopup() {
+        // Display a pop-up message for successful upload
+        alert("File shared with community successfully!");
+    }
+</script>
+
+</body>
+</html>
